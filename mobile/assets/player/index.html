@@ -154,12 +154,12 @@
   .transcript::-webkit-scrollbar { display: none; }
   .cue { padding: 9px 0 10px; transition: opacity .2s ease; cursor: pointer; }
   .cue .orig {
-    font-size: 17px; line-height: 1.42; font-weight: 500;
+    font-size: calc(var(--sub-size) * .85); line-height: 1.42; font-weight: 500;
     color: var(--text-tertiary);
     transition: color .2s ease;
   }
   .cue .trans {
-    margin-top: 5px; font-size: 14px; line-height: 1.5; color: var(--text-tertiary);
+    margin-top: 5px; font-size: calc(var(--sub-size) * .70); line-height: 1.5; color: var(--text-tertiary);
     opacity: .9; transition: color .2s ease, opacity .2s ease;
   }
   .cue.past { opacity: .62; }
@@ -764,6 +764,9 @@
             send({ type: 'player-ready' });
             try { player.setVolume(100); } catch (e) {}
             try { player.setPlaybackQuality(state.quality); } catch (e) {}
+          },
+          onError: function () {
+            showError('该视频不允许嵌入播放，或当前网络无法访问 YouTube。');
           },
           onStateChange: function (event) {
             state.playing = event.data === 1;

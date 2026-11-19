@@ -77,7 +77,12 @@ function finalizeCues(cues: Cue[]): Cue[] {
       }
       continue;
     }
-    if (last && cue.start - last.end < 0.25 && last.text.length < 80) {
+    if (
+      last &&
+      cue.start - last.end < 0.25 &&
+      !/[.!?。！？]$/.test(last.text) &&
+      last.text.length < 80
+    ) {
       last.text = `${last.text} ${cue.text}`.replace(/\s+/g, ' ').trim();
       last.end = cue.end;
       continue;

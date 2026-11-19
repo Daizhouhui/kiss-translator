@@ -43,7 +43,7 @@ npm run prebuild:android
 
 1. 把代码推到 `main`，或手动触发 **Actions → Build mobile apps → Run workflow**。
 2. 等两个 Job 完成：
-   - `kiss-subtitle-android` → `app-debug.apk`
+   - `kiss-subtitle-android` → `app-release.apk`（已内置 JS，可离线独立启动）
    - `kiss-subtitle-ios-unsigned` → `KissSubtitle-unsigned.ipa`
 3. Android 直接安装 APK。CI 的 debug 签名每次构建可能不同，覆盖安装失败时先卸载旧版再装。
 4. iOS 用 Windows 上的 [Sideloadly](https://sideloadly.io/) 或 AltStore 自签安装 IPA：

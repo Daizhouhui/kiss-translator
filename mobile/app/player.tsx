@@ -62,6 +62,7 @@ function playerBridgeScript() {
 (function(){
   try {
     if (window.__kissBridge && window.__kissBridge.timer) clearInterval(window.__kissBridge.timer);
+    if (window.__kissBridge && window.__kissBridge.cssTimer) clearInterval(window.__kissBridge.cssTimer);
     var bridge = window.__kissBridge = { mode: 'watch' };
     function injectCss(){
       try {
@@ -74,7 +75,7 @@ function playerBridgeScript() {
       } catch(e) {}
     }
     injectCss();
-    setInterval(injectCss, 3000);
+    bridge.cssTimer = setInterval(injectCss, 3000);
     function send(payload){
       try { window.ReactNativeWebView.postMessage(JSON.stringify(payload)); } catch(e) {}
     }

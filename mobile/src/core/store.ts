@@ -35,6 +35,7 @@ type AppState = {
   settingsUpdatedAt: number;
   subscriptions: Subscription[];
   favorites: FavoriteItem[];
+  history: FavoriteItem[];
   lastSyncAt: number;
   syncState: SyncState;
   syncMessage: string;
@@ -48,6 +49,8 @@ type AppState = {
   setSubscriptions: (items: Subscription[]) => void;
   toggleFavorite: (item: FavoriteItem) => boolean;
   removeFavorite: (videoId: string) => void;
+  recordHistory: (item: FavoriteItem) => void;
+  clearHistory: () => void;
   setSync: (state: SyncState, message?: string, at?: number) => void;
 };
 
@@ -59,6 +62,7 @@ export const useAppStore = create<AppState>()(
       settingsUpdatedAt: 0,
       subscriptions: [],
       favorites: [],
+      history: [],
       lastSyncAt: 0,
       syncState: 'idle',
       syncMessage: '',
@@ -115,6 +119,12 @@ export const useAppStore = create<AppState>()(
         set((state) => ({
           favorites: state.favorites.filter((fav) => fav.videoId !== videoId),
         })),
+      recordHistory: (item) =>
+        set((state) => {
+          const others = state.history.filter((entry) => entry.videoId !== item.videoId);
+          return { history: [item, ...others].slice(0, 120) };
+        }),
+      clearHistory: () => set({ history: [] }),
       setSync: (syncState, syncMessage = '', at) =>
         set((state) => ({
           syncState,
@@ -132,6 +142,7 @@ export const useAppStore = create<AppState>()(
         },
         subscriptions: state.subscriptions,
         favorites: state.favorites,
+        history: state.history,
         lastSyncAt: state.lastSyncAt,
         settingsUpdatedAt: state.settingsUpdatedAt,
       }),
@@ -142,6 +153,7 @@ export const useAppStore = create<AppState>()(
           settings: deepMerge(DEFAULT_SETTINGS, saved?.settings),
           subscriptions: saved?.subscriptions ?? [],
           favorites: saved?.favorites ?? [],
+          history: saved?.history ?? [],
           lastSyncAt: saved?.lastSyncAt ?? 0,
           settingsUpdatedAt: saved?.settingsUpdatedAt ?? 0,
         };

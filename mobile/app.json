@@ -2,14 +2,15 @@
   "expo": {
     "name": "Kiss 字幕",
     "slug": "kiss-subtitle",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "kisssubtitle",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.knny.kisssubtitle",
+      "buildNumber": "2",
       "infoPlist": {
         "UIViewControllerBasedStatusBarAppearance": true,
         "NSAppTransportSecurity": {
@@ -19,8 +20,9 @@
     },
     "android": {
       "package": "com.knny.kisssubtitle",
+      "versionCode": 2,
       "adaptiveIcon": {
-        "backgroundColor": "#6C4DF6",
+        "backgroundColor": "#171126",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
@@ -40,7 +42,7 @@
         {
           "image": "./assets/images/splash-icon.png",
           "resizeMode": "contain",
-          "backgroundColor": "#121016"
+          "backgroundColor": "#0B0812"
         }
       ],
       "expo-secure-store",

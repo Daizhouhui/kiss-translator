@@ -9,7 +9,7 @@ export const DEFAULT_SETTINGS: Settings = {
   provider: 'auto',
   autoFallbackDeepSeek: true,
   translateTitles: true,
-  theme: 'system',
+  theme: 'dark',
   subtitle: {
     fontSize: 20,
     mode: 'bilingual',

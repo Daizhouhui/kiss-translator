@@ -9,6 +9,7 @@ import {
   BackHandler,
   Linking,
   Modal,
+  Platform,
   Pressable,
   ScrollView,
   Share,
@@ -32,7 +33,11 @@ import {
 const AnyWebView: any = WebView;
 
 const WATCH_UA =
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+  Platform.OS === 'ios'
+    ? // WKWebView has reliable H.264/HEVC support but spotty VP9/AV1 in MSE.
+      // Presenting as desktop Safari makes YouTube pick a compatible stream.
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15'
+    : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 
 const WATCH_CSS = `
 html,body{background:#000!important;margin:0!important;overflow:hidden!important;}

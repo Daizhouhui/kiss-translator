@@ -63,6 +63,18 @@ function playerBridgeScript() {
   try {
     if (window.__kissBridge && window.__kissBridge.timer) clearInterval(window.__kissBridge.timer);
     var bridge = window.__kissBridge = { mode: 'watch' };
+    function injectCss(){
+      try {
+        var old = document.getElementById('kiss-watch-css');
+        if (old) return;
+        var style = document.createElement('style');
+        style.id = 'kiss-watch-css';
+        style.textContent = ${JSON.stringify(WATCH_CSS)};
+        (document.head || document.documentElement).appendChild(style);
+      } catch(e) {}
+    }
+    injectCss();
+    setInterval(injectCss, 3000);
     function send(payload){
       try { window.ReactNativeWebView.postMessage(JSON.stringify(payload)); } catch(e) {}
     }
